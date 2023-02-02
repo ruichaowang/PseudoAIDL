@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/ShowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="133dp"
+            android:layout_height="72dp"
+            android:onClick="click_upload"
+            android:text="测试上传" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="158dp"
+            android:layout_height="63dp"
+            android:onClick="click_calib_2"
+            android:text="悬架标定 2" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="159dp"
+            android:layout_height="68dp"
+            android:onClick="click_calib_3"
+            android:text="悬架标定 3" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="155dp"
+            android:layout_height="60dp"
+            android:onClick="click_calib_4"
+            android:text="悬架标定 4" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="155dp"
+            android:layout_height="60dp"
+            android:onClick="click_calib_5"
+            android:text="停止标定" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
