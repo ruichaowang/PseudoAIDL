@@ -6,7 +6,7 @@ import com.lixiang.calibration.SvmCalibStateCallback;
 // Declare any non-default types here with import statements
 
 interface iSvmCalib {
-    void setOnCalibreationChangedListener(SvmCalibStateCallback cb); // 注册回调接口 registerListener
+    void setOnCalibrationChangedListener(SvmCalibStateCallback cb); // 注册回调接口 registerListener
     void unregisterListener(SvmCalibStateCallback cb);               // 注销回调接口
 
 

@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "Calib service Connected");
 
             try {
-                m_CalibService.setOnCalibreationChangedListener(m_SvmCalibStateCallback);    // 需要保证 connect 后再执行回调的注册
+                m_CalibService.setOnCalibrationChangedListener(m_SvmCalibStateCallback);    // 需要保证 connect 后再执行回调的注册
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
