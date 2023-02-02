@@ -19,7 +19,7 @@ import com.lixiang.calibration.iSvmCalib;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "模拟的诊断程序";
-    private TextView tv;
+    boolean calib_service_binded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +27,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart!");
-
+    private void Bind_service() {
         ComponentName componetName = new ComponentName(
                 "com.lixiang.calibration",  //这个参数是另外一个app的包名
                 "com.lixiang.calibration.SvmCalibService");   //这个是要启动的Service的全路径名
 
         Intent intent = new Intent();
         intent.setComponent(componetName);
+
         bindService(intent, mConnection_remote, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart!");
+
+        Bind_service();
     }
 
 
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     m_CalibService.stopCalibration();
                     m_CalibService.unregisterListener(m_SvmCalibStateCallback);
                     unbindService(mConnection_remote);
+                    calib_service_binded = false;
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         // Called when the connection with the service is established
         public void onServiceConnected(ComponentName className, IBinder service) {
             m_CalibService = iSvmCalib.Stub.asInterface(service);
+            calib_service_binded = true;
             Log.i(TAG, "Calib service Connected");
 
             try {
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName className) {
             m_CalibService = null;
+            boolean calib_service_binded = false;
             Log.e(TAG, "Calib service has unexpectedly disconnected");
         }
     };
@@ -107,11 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
     /** 按钮的实现 */
     public void click_upload(View v) throws RemoteException {
+        if (false == calib_service_binded) {return;}    //必须保证绑定后才可以运行
         m_CalibService.uploadCalibrationData();
     }
 
     public void click_calib_2(View v) throws RemoteException {
 
+        if (false == calib_service_binded) {return;}    //必须保证绑定后才可以运行
         Thread t_calib = new Thread(() -> {
             try {
                 m_CalibService.openCalibrationView(2);
@@ -124,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void click_calib_3(View v) throws RemoteException {
 
+        if (false == calib_service_binded) {return;}    //必须保证绑定后才可以运行
         Thread t_calib = new Thread(() -> {
             try {
                 m_CalibService.openCalibrationView(3);
@@ -136,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void click_calib_4(View v) throws RemoteException {
 
-        // 开启执行标定
+        if (false == calib_service_binded) {return;}    //必须保证绑定后才可以运行
         Thread t_calib = new Thread(() -> {
             try {
                 m_CalibService.openCalibrationView(4);
@@ -149,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void click_calib_5(View v) throws RemoteException {
 
-        // 开启执行标定
+        if (false == calib_service_binded) {return;}    //必须保证绑定后才可以运行
         Thread t_calib = new Thread(() -> {
             try {
                 m_CalibService.stopCalibration();
@@ -160,4 +171,7 @@ public class MainActivity extends AppCompatActivity {
         t_calib.start();
     }
 
+    public void click_calib_6(View v) throws RemoteException {
+        Bind_service();
+    }
 }

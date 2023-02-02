@@ -46,6 +46,12 @@
             android:layout_height="60dp"
             android:onClick="click_calib_5"
             android:text="停止标定" />
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="155dp"
+            android:layout_height="60dp"
+            android:onClick="click_calib_6"
+            android:text="绑定服务" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
