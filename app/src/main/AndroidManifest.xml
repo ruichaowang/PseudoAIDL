@@ -5,6 +5,9 @@
     <queries>
         <package android:name="com.lixiang.calibration" />
         <package android:name="com.lixiang.calibration.SvmCalibService" />
+        <intent>
+            <action android:name="com.lixiang.calibration.SvmCalibService.start" />
+        </intent>
     </queries>
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />

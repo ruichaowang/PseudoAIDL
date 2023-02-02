@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.setComponent(componetName);
-
         bindService(intent, mConnection_remote, Context.BIND_AUTO_CREATE);
     }
 
