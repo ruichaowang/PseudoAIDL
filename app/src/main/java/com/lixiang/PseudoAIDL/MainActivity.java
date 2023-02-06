@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             /*标定成功后可以选择关闭 service 比如在此我设置了拿到结果后 5s 后关闭service*/
             Thread t_close_calib = new Thread(() -> {
                 try {
-                    Thread.currentThread().sleep(5000);
+                    Thread.currentThread().sleep(99000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onUploadStateChanged(boolean success) throws RemoteException {
+        public void onUploadStateChanged(int state) throws RemoteException {
             Log.i(TAG,"tbd");
         }
 
         @Override
-        public void onDownloadStateChanged(boolean success) throws RemoteException {
+        public void onDownloadStateChanged(int state) throws RemoteException {
             Log.i(TAG,"tbd");
         }
     };
